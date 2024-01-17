@@ -62,6 +62,7 @@ namespace CarsMVCTrialExam.Controllers
             if (user == null)
             {
                 ModelState.AddModelError("", "Username or password is wrong!");
+                return View(vm);
             }
             var result = await _signInManager.PasswordSignInAsync(user, vm.Password, false, true);
             if(!result.Succeeded)

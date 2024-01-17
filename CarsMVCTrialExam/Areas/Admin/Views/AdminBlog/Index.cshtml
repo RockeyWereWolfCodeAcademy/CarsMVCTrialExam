@@ -1,0 +1,61 @@
+﻿@{
+	ViewData["Title"] = "Blogs";
+}
+
+@section Scripts {
+    <script src="js/demo/datatables-demo.js"></script>
+}
+
+@model IEnumerable<AdminBlogListVM>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    @* <h1 class="h3 mb-2 text-gray-800">Blogs Table</h1> *@
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Blogs Table</h6>
+            <a class="btn btn-outline-success" asp-action="Create">Create</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Image</th>
+                            <th colspan="2" style="text-align:center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Any())
+                        {
+                            <tr>
+                                <td colspan="5" style="text-align:center">NO DATA</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var blog in Model)
+                            {
+                                <tr>
+                                    <td>@blog.Id</td>
+                                    <td>@blog.Title</td>
+                                    <td><img src="@blog.ImgUrl" width="100" length="100"></td>
+                                    <td><a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-outline-danger">Delete</a></td>
+                                    <td><a asp-action="Update" asp-route-id="@blog.Id" class="btn btn-outline-info">Update</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
